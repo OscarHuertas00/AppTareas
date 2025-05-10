@@ -2,16 +2,50 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Lista de Tareas</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Mi Lista de Tareas</title>
 </head>
 <body>
-  <div class="container">
-    <h1>Mi Lista de Tareas</h1>
-    <input type="text" id="taskInput" placeholder="Escribe una tarea...">
-    <button onclick="addTask()">Agregar</button>
-    <ul id="taskList"></ul>
-  </div>
-  <script src="app.js"></script>
+  <h1>Lista de Tareas</h1>
+  <ul id="taskList"></ul>
+
+  <input type="text" id="taskInput" placeholder="Agregar tarea" />
+  <button onclick="addTask()">Agregar Tarea</button>
+
+  <script>
+    const apiUrl = 'https://mi-app.railway.app';  // Cambia esto con la URL de tu app en Railway
+
+    // Obtener todas las tareas
+    async function fetchTasks() {
+      const response = await fetch(`${apiUrl}/tasks`);
+      const tasks = await response.json();
+      const taskList = document.getElementById('taskList');
+      taskList.innerHTML = '';
+      tasks.forEach(task => {
+        const li = document.createElement('li');
+        li.textContent = `${task.tarea} - ${task.completada}`;
+        taskList.appendChild(li);
+      });
+    }
+
+    // Agregar una tarea
+    async function addTask() {
+      const taskInput = document.getElementById('taskInput');
+      const task = taskInput.value;
+      if (task) {
+        await fetch(`${apiUrl}/tasks`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ task })
+        });
+        taskInput.value = '';
+        fetchTasks();  // Actualizar la lista de tareas
+      }
+    }
+
+    // Cargar las tareas al inicio
+    fetchTasks();
+  </script>
 </body>
 </html>
