@@ -1,5 +1,13 @@
 {
+  "name": "mi-app",
+  "version": "1.0.0",
+  "description": "Aplicación en Railway",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
-    "axios": "^1.9.0"
+    "axios": "^1.9.0",
+    "express": "^4.21.2"
   }
 }
