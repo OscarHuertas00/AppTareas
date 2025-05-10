@@ -1,14 +1,11 @@
 {
-  "name": "mi-app",
+  "name": "tallerinvestigativo",
   "version": "1.0.0",
-  "description": "Aplicación en Railway",
-  "main": "app.js",
+  "main": "app.js",  
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js"  
   },
   "dependencies": {
-    "axios": "^1.9.0",
-    "express": "^4.21.2",
-    "media-typer": "^0.3.0"
+
   }
 }
